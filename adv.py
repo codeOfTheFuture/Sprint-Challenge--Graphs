@@ -38,10 +38,9 @@ class Graph():
         self.path = []
 
     def dft(self):
-        self.rooms[self.player.current_room.id] = {}
-        exits = self.player.current_room.get_exits()
         
-        for direction in exits:
+        self.rooms[self.player.current_room.id] = {}
+        for direction in self.player.current_room.get_exits():
             self.rooms[self.player.current_room.id][direction] = '?'
 
 
@@ -49,7 +48,7 @@ class Graph():
             not_visited = []
 
             for room in self.rooms[self.player.current_room.id]:
-                if self.rooms[self.player.current_room.id] == '?':
+                if self.rooms[self.player.current_room.id][room] == '?':
                     not_visited.append(room)
 
             if len(not_visited):
@@ -62,7 +61,7 @@ class Graph():
                 if self.player.current_room.id not in self.rooms:
                     self.rooms[self.player.current_room.id] = {}
             
-                    for direction in exits:
+                    for direction in self.player.current_room.get_exits():
                         self.rooms[self.player.current_room.id][direction] = '?'
                     self.rooms[self.player.current_room.id][self.directions[new_direction]] = True
 
